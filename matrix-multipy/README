@@ -1,0 +1,47 @@
+File:	README
+Author: Jharrod LaFon
+Date:	Fall 2010
+
+Contents
+--------
+I.   Compiling
+II.  Usage
+III. Theory of Operation
+
+I. Compiling
+------------
+For GNU/Linux based systems, run:
+`make linux`
+The resulting binary will be called `mm`
+
+For Solaris (Unix) systems, run:
+`make solaris`
+The resulting binary will be called `mm_solaris`
+
+II. Usage
+---------
+For Linux based systems, run:
+`./mm`
+You will see this output:
+Usage: mm -n <size> <option>
+            Flag    Timing Function
+    	    -t      time()
+            -g      clock_gettime()
+            -u      getrusage()
+            -r      gethrtime()
+
+The argument size is required, and is the array size.  The option argument is 
+also required and specifies the timing choice.  Not that -r is ONLY available
+on Solaris, and will not show up as an option on GNU/Linux systems.
+
+A example execution:
+`./mm -n 128 -t`
+
+III. Theory of Operation
+------------------------
+Two nXn matrices are created and filled with random integers.
+The resulting value in the rth row and cth column is calculated as:
+
+c(r,c) = sum[a(r,0)*b(0,c)+a(r,1)*b(1,c)+...+a(r,n)*b(n,c)]
+
+Source: mathworld.wolfram.com/MatrixMultiplication.html
